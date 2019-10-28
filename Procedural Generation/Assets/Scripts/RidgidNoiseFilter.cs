@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleNoiseFilter : INoiseFilter
+public class RidgidNoiseFilter : INoiseFilter
 {
 
-    NoiseSettings.SimpleNoiseSettings settings;
+    NoiseSettings.RidgidNoiseSettings settings;
     Noise noise = new Noise();
 
-    public SimpleNoiseFilter(NoiseSettings.SimpleNoiseSettings settings)
+    public RidgidNoiseFilter(NoiseSettings.RidgidNoiseSettings settings)
     {
         this.settings = settings;
     }
@@ -18,11 +18,16 @@ public class SimpleNoiseFilter : INoiseFilter
         float noiseValue = 0;
         float frequency = settings.baseRoughness;
         float amplitude = 1;
+        float weight = 1;
 
         for (int i = 0; i < settings.numLayers; i++)
         {
-            float v = noise.Evaluate(point * frequency + settings.centre);
-            noiseValue += (v + 1) * .5f * amplitude;
+            float v = 1 - Mathf.Abs(noise.Evaluate(point * frequency + settings.centre));
+            v *= v;
+            v *= weight;
+            weight = Mathf.Clamp01(v * settings.weightMultiplier);
+
+            noiseValue += v * amplitude;
             frequency *= settings.roughness;
             amplitude *= settings.persistence;
         }
