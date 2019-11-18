@@ -42,17 +42,17 @@ public class MeshGenerator : MonoBehaviour
             }
         }
 
+        triangles = new int[xSize * zSize * 6];
         int vert = 0; //vertices
         int tris = 0; //triangles
         for (int x = 0; x < xSize; x++) //<--------- Creating the triangles
         {
-            triangles = new int[6];
-            triangles[0] = 0;
-            triangles[1] = xSize + 1;
-            triangles[2] = 1;
-            triangles[3] = 1;
-            triangles[4] = xSize + 1;
-            triangles[5] = xSize + 2;
+            triangles[tris + 0] = vert + 0;
+            triangles[tris + 1] = vert + xSize + 1;
+            triangles[tris + 2] = vert + 1;
+            triangles[tris + 3] = vert + 1;
+            triangles[tris + 4] = vert + xSize + 1;
+            triangles[tris + 5] = vert + xSize + 2;
 
             vert++;
             tris += 6;
