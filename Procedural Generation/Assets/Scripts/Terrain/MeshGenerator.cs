@@ -19,18 +19,18 @@ public class MeshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh; //<---- setting mesh variable to be the mesh filter on the game object
 
         CreateShape();
-        UpdateMesh();
     }
 
     void Update()
     {
-
+        UpdateMesh();
     }
 
 
 
     private void CreateShape()
     {
+
         vertices = new Vector3[(xSize + 1) * (zSize + 1)]; //<---- Calculating the amount of vertices based on the size of the mesh
         
         for(int i = 0, z = 0; z <= zSize; z++) //<----- putting the vertices in the scene
@@ -42,21 +42,30 @@ public class MeshGenerator : MonoBehaviour
             }
         }
 
+
+
+
         triangles = new int[xSize * zSize * 6];
         int vert = 0; //vertices
         int tris = 0; //triangles
-        for (int x = 0; x < xSize; x++) //<--------- Creating the triangles
-        {
-            triangles[tris + 0] = vert + 0;
-            triangles[tris + 1] = vert + xSize + 1;
-            triangles[tris + 2] = vert + 1;
-            triangles[tris + 3] = vert + 1;
-            triangles[tris + 4] = vert + xSize + 1;
-            triangles[tris + 5] = vert + xSize + 2;
 
+        for (int z = 0; z < zSize; z++)//<--------- Creating the triangles
+        {
+            for (int x = 0; x < xSize; x++) 
+            {
+                triangles[tris + 0] = vert + 0;
+                triangles[tris + 1] = vert + xSize + 1;
+                triangles[tris + 2] = vert + 1;
+                triangles[tris + 3] = vert + 1;
+                triangles[tris + 4] = vert + xSize + 1;
+                triangles[tris + 5] = vert + xSize + 2;
+
+                vert++;
+                tris += 6;
+            }
             vert++;
-            tris += 6;
         }
+        
     }
 
     private void UpdateMesh() //<-------- put in update for audio visualizer
