@@ -42,14 +42,21 @@ public class MeshGenerator : MonoBehaviour
             }
         }
 
+        int vert = 0; //vertices
+        int tris = 0; //triangles
+        for (int x = 0; x < xSize; x++) //<--------- Creating the triangles
+        {
+            triangles = new int[6];
+            triangles[0] = 0;
+            triangles[1] = xSize + 1;
+            triangles[2] = 1;
+            triangles[3] = 1;
+            triangles[4] = xSize + 1;
+            triangles[5] = xSize + 2;
 
-        triangles = new int[6];
-        triangles[0] = 0;
-        triangles[1] = xSize + 1;
-        triangles[2] = 1;
-        triangles[3] = 1;
-        triangles[4] = xSize + 1;
-        triangles[5] = xSize + 2;
+            vert++;
+            tris += 6;
+        }
     }
 
     private void UpdateMesh() //<-------- put in update for audio visualizer
