@@ -41,6 +41,15 @@ public class MeshGenerator : MonoBehaviour
                 i++;
             }
         }
+
+
+        triangles = new int[6];
+        triangles[0] = 0;
+        triangles[1] = xSize + 1;
+        triangles[2] = 1;
+        triangles[3] = 1;
+        triangles[4] = xSize + 1;
+        triangles[5] = xSize + 2;
     }
 
     private void UpdateMesh() //<-------- put in update for audio visualizer
