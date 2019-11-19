@@ -8,7 +8,10 @@ public class MeshGenerator : MonoBehaviour
 
     Vector3[] vertices; //<--the points evenly spaces throughout the grid
     int[] triangles; //<-----the triangles that make up the grid
-    Vector2[] uvs; //<--------points that map textures
+    //Vector2[] uvs; //<--------makes points to map textures
+
+    Color[] colours; 
+    public Gradient gradient;
 
     public int xSize = 20;
     public int zSize = 20;
@@ -25,6 +28,8 @@ public class MeshGenerator : MonoBehaviour
     public float noise03Scale = 6f;
     public float noise03Amp = 6f;
 
+    private float minTerrainHeight;
+    private float maxTerrainHeight;
 
     void Start()
     {
@@ -54,6 +59,13 @@ public class MeshGenerator : MonoBehaviour
                 //float y = GetNoiseSample(x, z);
                 float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
                 vertices[i] = new Vector3(x, y, z); //<---------y = height of the vertices
+
+                if (y > maxTerrainHeight)
+                    maxTerrainHeight = y; //<-----------always calculating the maximum terrain height
+
+                if (y < minTerrainHeight)
+                    minTerrainHeight = y; //<-----------always calculating the minimum terrain height
+
                 i++;
             }
         }
@@ -83,16 +95,26 @@ public class MeshGenerator : MonoBehaviour
         }
 
 
-        uvs = new Vector2[vertices.Length]; //<------make this array the same size of the vertices array
+        //uvs = new Vector2[vertices.Length]; //<------make this array the same size of the vertices array
+        colours = new Color[vertices.Length]; //<------make this array the same size of the vertices array
         for (int i = 0, z = 0; z <= zSize; z++) //<----- putting the vertices in the scene
         {
             for (int x = 0; x <= zSize; x++)
             {
-                uvs[i] = new Vector2((float)x / xSize, (float)z / zSize);
+                //uvs[i] = new Vector2((float)x / xSize, (float)z / zSize);
+
+                float height = Mathf.InverseLerp(minTerrainHeight, maxTerrainHeight, vertices[i].y);  //<---------calculate the height off the vetice using an inverse lerp to give a value between 0 and 1
+                colours[i] = gradient.Evaluate(height); //<---------use a gradient to determine the colour based on the height of the vertice
                 i++;
             }
         }
     }
+
+
+
+
+
+
 
     private void UpdateMesh() //<-------- put in update for audio visualizer
     {
@@ -100,7 +122,8 @@ public class MeshGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        mesh.uv = uvs;
+        //mesh.uv = uvs;
+        mesh.colors = colours;
 
         mesh.RecalculateNormals();
     }
