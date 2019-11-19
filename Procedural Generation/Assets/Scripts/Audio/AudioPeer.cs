@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class AudioPeer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    static AudioSource audioSource;
+    public static float[] samples = new float[512];
+
     void Start()
     {
-        
+        audioSource = this.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        GetSpectrumAudioSource();
+    }
+
+
+    public void GetSpectrumAudioSource()
+    {
+        audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman); //<--------converting the 20,000 samples into the amount of samples in the sample array
     }
 }
