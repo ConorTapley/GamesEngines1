@@ -6,11 +6,24 @@ public class MeshGenerator : MonoBehaviour
 {
     Mesh mesh;
 
-    Vector3[] vertices;
-    int[] triangles;
+    Vector3[] vertices; //<--the points evenly spaces throughout the grid
+    int[] triangles; //<-----the triangles that make up the grid
+    Vector2[] uvs; //<--------points that map textures
 
     public int xSize = 20;
     public int zSize = 20;
+
+    public int textureWidth = 1024;
+    public int textureHeight = 1024;
+
+    public float noise01Scale = 2f;
+    public float noise01Amp = 2f;
+
+    public float noise02Scale = 4f;
+    public float noise02Amp = 4f;
+
+    public float noise03Scale = 6f;
+    public float noise03Amp = 6f;
 
 
     void Start()
@@ -23,6 +36,7 @@ public class MeshGenerator : MonoBehaviour
 
     void Update()
     {
+        CreateShape();
         UpdateMesh();
     }
 
@@ -37,6 +51,7 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x <= zSize; x++) 
             {
+                //float y = GetNoiseSample(x, z);
                 float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
                 vertices[i] = new Vector3(x, y, z); //<---------y = height of the vertices
                 i++;
@@ -66,7 +81,17 @@ public class MeshGenerator : MonoBehaviour
             }
             vert++;
         }
-        
+
+
+        uvs = new Vector2[vertices.Length]; //<------make this array the same size of the vertices array
+        for (int i = 0, z = 0; z <= zSize; z++) //<----- putting the vertices in the scene
+        {
+            for (int x = 0; x <= zSize; x++)
+            {
+                uvs[i] = new Vector2((float)x / xSize, (float)z / zSize);
+                i++;
+            }
+        }
     }
 
     private void UpdateMesh() //<-------- put in update for audio visualizer
@@ -75,6 +100,7 @@ public class MeshGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
 
         mesh.RecalculateNormals();
     }
