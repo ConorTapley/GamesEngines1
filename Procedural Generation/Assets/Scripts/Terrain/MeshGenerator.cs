@@ -6,8 +6,8 @@ public class MeshGenerator : MonoBehaviour
 {
     Mesh mesh;
 
-    public AudioPeer audioInput;
     public float audioScale = 2f;
+    public float audioStartSize = 2f;
 
     Vector3[] vertices; //<--the points evenly spaces throughout the grid
     int[] triangles; //<-----the triangles that make up the grid
@@ -66,7 +66,7 @@ public class MeshGenerator : MonoBehaviour
             {
                 //float y = GetNoiseSample(x, z);
                 //float y = Mathf.PerlinNoise(x * noise, z * noise) * noise2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
-                float y = AudioPeer.samples[i] * audioScale;
+                float y = (AudioPeer.samples[i] * audioScale * Mathf.PerlinNoise(x * noise, z * noise) * noise2) + audioStartSize;
                 vertices[i] = new Vector3(x, y, z); //<---------y = height of the vertices
 
                 if (y > maxTerrainHeight)
