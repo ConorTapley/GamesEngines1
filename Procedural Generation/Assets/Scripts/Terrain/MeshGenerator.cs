@@ -10,6 +10,9 @@ public class MeshGenerator : MonoBehaviour
     int[] triangles; //<-----the triangles that make up the grid
     //Vector2[] uvs; //<--------makes points to map textures
 
+    public float noise = 0.3f;
+    public float noise2 = 2f;
+
     Color[] colours; 
     public Gradient gradient;
 
@@ -28,7 +31,9 @@ public class MeshGenerator : MonoBehaviour
     public float noise03Scale = 6f;
     public float noise03Amp = 6f;
 
+    [SerializeField]
     private float minTerrainHeight;
+    [SerializeField]
     private float maxTerrainHeight;
 
     void Start()
@@ -57,7 +62,7 @@ public class MeshGenerator : MonoBehaviour
             for (int x = 0; x <= zSize; x++) 
             {
                 //float y = GetNoiseSample(x, z);
-                float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
+                float y = Mathf.PerlinNoise(x * noise, z * noise) * noise2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
                 vertices[i] = new Vector3(x, y, z); //<---------y = height of the vertices
 
                 if (y > maxTerrainHeight)
