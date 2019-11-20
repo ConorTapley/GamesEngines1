@@ -6,8 +6,11 @@ public class MeshGenerator : MonoBehaviour
 {
     Mesh mesh;
 
-    public float audioScale = 2f;
+    //public float audioStartScale, audioScaleMultiplier;
+    //public int audioBand;
     public float audioStartSize = 2f;
+    public float audioScale = 2f;
+    
 
     Vector3[] vertices; //<--the points evenly spaces throughout the grid
     int[] triangles; //<-----the triangles that make up the grid
@@ -19,9 +22,11 @@ public class MeshGenerator : MonoBehaviour
     Color[] colours; 
     public Gradient gradient;
 
-    public int xSize = 20;
-    public int zSize = 20;
+    public int meshSize = 20;
+    private int xSize;
+    private int zSize;
 
+    /*
     public int textureWidth = 1024;
     public int textureHeight = 1024;
 
@@ -33,6 +38,7 @@ public class MeshGenerator : MonoBehaviour
 
     public float noise03Scale = 6f;
     public float noise03Amp = 6f;
+    */
 
     [SerializeField]
     private float minTerrainHeight;
@@ -43,6 +49,8 @@ public class MeshGenerator : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh; //<---- setting mesh variable to be the mesh filter on the game object
+        xSize = meshSize;
+        zSize = meshSize;
 
         CreateShape();
     }
@@ -67,6 +75,7 @@ public class MeshGenerator : MonoBehaviour
                 //float y = GetNoiseSample(x, z);
                 //float y = Mathf.PerlinNoise(x * noise, z * noise) * noise2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
                 float y = (AudioPeer.samples[i] * audioScale * Mathf.PerlinNoise(x * noise, z * noise) * noise2) + audioStartSize;
+                //float y = (AudioPeer.frequencyBands[audioBand] * audioScaleMultiplier) + audioStartScale;
                 vertices[i] = new Vector3(x, y, z); //<---------y = height of the vertices
 
                 if (y > maxTerrainHeight)
