@@ -2,24 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeshGenerator : MonoBehaviour
+public class AudioPlanet : MonoBehaviour
 {
     Mesh mesh;
 
+    [Range(2, 256)]
+    public int resolution = 10;
+
+    [SerializeField, HideInInspector]
+    MeshFilter[] meshFilters;
+    AudioTFace[] terrainFaces;
+
     //public float audioStartScale, audioScaleMultiplier;
     //public int audioBand;
-    public float audioStartSize = 2f;
-    public float audioScale = 2f;
-    
+    public float audioStartSize = 2f; /////////////////////////////////////
+    public float audioScale = 2f;//////////////////////////////////////////
+
 
     Vector3[] vertices; //<--the points evenly spaces throughout the grid
     int[] triangles; //<-----the triangles that make up the grid
     //Vector2[] uvs; //<--------makes points to map textures
 
-    public float noise = 0.3f;
-    public float noise2 = 2f;
+    public float noise = 0.3f;////////////////////////////////////////////
+    public float noise2 = 2f;/////////////////////////////////////////////
 
-    Color[] colours; 
+    Color[] colours;
     public Gradient gradient;
 
     public int meshSize = 20;
@@ -27,9 +34,20 @@ public class MeshGenerator : MonoBehaviour
     private int zSize;
 
     [SerializeField]
-    private float minTerrainHeight;
+    private float minTerrainHeight = 0f;
     [SerializeField]
-    private float maxTerrainHeight;
+    private float maxTerrainHeight = 5.2f;
+
+
+
+
+
+    private void OnValidate()
+    {
+        Initialize();
+        GenerateMesh();
+    }
+
 
     void Start()
     {
@@ -45,7 +63,50 @@ public class MeshGenerator : MonoBehaviour
     {
         CreateShape();
         UpdateMesh();
+
+        GenerateMesh();
     }
+
+    void Initialize()
+    {
+        if (meshFilters == null || meshFilters.Length == 0)
+        {
+            meshFilters = new MeshFilter[6];
+        }
+        terrainFaces = new AudioTFace[6];
+
+        Vector3[] directions = { Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back };
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (meshFilters[i] == null)
+            {
+                GameObject meshObj = new GameObject("mesh");
+                meshObj.transform.parent = transform;
+
+                meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
+                meshFilters[i] = meshObj.AddComponent<MeshFilter>();
+                meshFilters[i].sharedMesh = new Mesh();
+            }
+
+            terrainFaces[i] = new AudioTFace(meshFilters[i].sharedMesh, resolution, directions[i]);
+        }
+    }
+
+    void GenerateMesh()
+    {
+        foreach (AudioTFace face in terrainFaces)
+        {
+            face.ConstructMesh();
+        }
+    }
+
+
+
+
+
+
+
 
 
 
@@ -53,10 +114,10 @@ public class MeshGenerator : MonoBehaviour
     {
 
         vertices = new Vector3[(xSize + 1) * (zSize + 1)]; //<---- Calculating the amount of vertices based on the size of the mesh
-        
-        for(int i = 0, z = 0; z <= zSize; z++) //<----- putting the vertices in the scene
+
+        for (int i = 0, z = 0; z <= zSize; z++) //<----- putting the vertices in the scene
         {
-            for (int x = 0; x <= zSize; x++) 
+            for (int x = 0; x <= zSize; x++)
             {
                 //float y = GetNoiseSample(x, z);
                 //float y = Mathf.PerlinNoise(x * noise, z * noise) * noise2; //<------------------------------------------------------------------------------PUT VISUALIZER HERE!!! ------------- y = height
@@ -74,16 +135,13 @@ public class MeshGenerator : MonoBehaviour
             }
         }
 
-
-
-
         triangles = new int[xSize * zSize * 6];
         int vert = 0; //vertices
         int tris = 0; //triangles
 
         for (int z = 0; z < zSize; z++)//<--------- Creating the triangles
         {
-            for (int x = 0; x < xSize; x++) 
+            for (int x = 0; x < xSize; x++)
             {
                 triangles[tris + 0] = vert + 0;
                 triangles[tris + 1] = vert + xSize + 1;
