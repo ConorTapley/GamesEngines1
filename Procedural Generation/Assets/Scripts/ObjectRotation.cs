@@ -5,7 +5,10 @@ using UnityEngine;
 public class ObjectRotation : MonoBehaviour
 {
     private GameObject planet;
-    [SerializeField] private float rotationSpeed = 2f;
+    
+    [SerializeField] private float xRotationSpeed = 2f;
+    [SerializeField] private float yRotationSpeed = 2f;
+    [SerializeField] private float zRotationSpeed = 2f;
 
     void Start()
     {
@@ -16,6 +19,6 @@ public class ObjectRotation : MonoBehaviour
     void Update()
     {
         //planet.transform.eulerAngles = new Vector3(planet.transform.eulerAngles.x, planet.transform.eulerAngles.y * rotationSpeed, planet.transform.eulerAngles.z);
-        planet.transform.Rotate(0, rotationSpeed, 0);
+        planet.transform.Rotate(xRotationSpeed, yRotationSpeed, zRotationSpeed);
     }
 }
