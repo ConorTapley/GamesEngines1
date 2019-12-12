@@ -50,7 +50,7 @@ public class AudioTFace : MonoBehaviour
                 //try visualizer here
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
 
-                Vector3 pointOnUnitSphere = pointOnUnitCube.normalized * audioH; // make the local up affected by the audio
+                Vector3 pointOnUnitSphere = pointOnUnitCube.normalized * audioH * Mathf.PerlinNoise(resolution, resolution); // make the local up affected by the audio
 
                 vertices[i] = new Vector3(pointOnUnitSphere.x, pointOnUnitSphere.y, pointOnUnitSphere.z); 
 
