@@ -50,8 +50,9 @@ public class AudioTFace : MonoBehaviour
                 //try visualizer here
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
 
-                Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
-                vertices[i] = new Vector3(pointOnUnitSphere.x, pointOnUnitSphere.y + audioH, pointOnUnitSphere.z); //<----------------audio effecting the y axis
+                Vector3 pointOnUnitSphere = pointOnUnitCube.normalized * audioH; // make the local up affected by the audio
+
+                vertices[i] = new Vector3(pointOnUnitSphere.x, pointOnUnitSphere.y, pointOnUnitSphere.z); 
 
                 if (x != resolution - 1 && y != resolution - 1)
                 {
