@@ -42,12 +42,14 @@ public class AudioCanvas : MonoBehaviour
     {
         volumeString = "70";
         pitchString = "1";
+        intensityString = "1";
     }
 
     void Update()
     {
         volumeText.text = volumeString + "%";
         pitchText.text = pitchString;
+        intensityText.text = intensityString;
     }
 
     ////////////////////////////////////////////////Sliders//////////////////////////////////////////////////////
