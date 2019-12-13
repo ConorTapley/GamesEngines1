@@ -6,9 +6,9 @@ using UnityEngine.Audio;
 
 public class AudioCanvas : MonoBehaviour
 {
-    
-    public AudioTFace atf;
-    [SerializeField] private float intensity = 2f;
+    public bool panelsOn = true;
+
+    public AudioPlanet ap;
 
     public AudioSource audioSource;
     [SerializeField] AudioClip youAndI;
@@ -21,18 +21,27 @@ public class AudioCanvas : MonoBehaviour
     public Text volumeText;
     private string pitchString;
     public Text pitchText;
+    private string intensityString;
+    public Text intensityText;
 
     void Awake()
     {
-        mainPanel.SetActive(true);
-        changeSongPanel.SetActive(false);
+        if(panelsOn)
+        {
+            mainPanel.SetActive(true);
+            changeSongPanel.SetActive(false);
+        }
+        else
+        {
+            mainPanel.SetActive(false);
+            changeSongPanel.SetActive(false);
+        }
     }
 
     private void Start()
     {
         volumeString = "70";
         pitchString = "1";
-        intensity = atf.intensity;
     }
 
     void Update()
@@ -53,6 +62,12 @@ public class AudioCanvas : MonoBehaviour
     {
         audioSource.pitch = sliderValue;
         pitchString = sliderValue.ToString("f1");
+    }
+
+    public void Intensity(float sliderValue)
+    {
+        ap.intensity = sliderValue;
+        intensityString = sliderValue.ToString("f0");
     }
 
 

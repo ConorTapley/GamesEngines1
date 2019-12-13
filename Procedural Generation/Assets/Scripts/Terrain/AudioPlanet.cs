@@ -5,8 +5,10 @@ using UnityEngine;
 public class AudioPlanet : MonoBehaviour
 {
     Mesh mesh;
-
+    
     public NewColourSettings colourSettings;
+
+    public float intensity = 2f;
 
     [Range(2, 256)]
     public int resolution = 10;
@@ -14,7 +16,7 @@ public class AudioPlanet : MonoBehaviour
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     AudioTFace[] terrainFaces;
-    public float intensity = 2f;
+    
     public float audioStartSize = 2f;
     public float audioScale = 2f;
 
@@ -47,6 +49,7 @@ public class AudioPlanet : MonoBehaviour
 
     void Start()
     {
+        
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh; //<---- setting mesh variable to be the mesh filter on the game object
         xSize = meshSize;
@@ -57,7 +60,16 @@ public class AudioPlanet : MonoBehaviour
     {
         GenerateMesh();
         GenerateColours();
+
+        
+        
+        for (int i = 0; i < 6; i++)
+        {
+            terrainFaces[i].intensity = intensity;
+        }
+        
     }
+
 
     void Initialize()
     {

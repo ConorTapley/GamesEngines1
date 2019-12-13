@@ -9,7 +9,7 @@ public class AudioTFace : MonoBehaviour
     public float audioScale = 2f;
     public float noise = 0.3f;
     public float noise2 = 2f;
-    public float intensity = 10f;
+    public float intensity = 1f;
 
     Mesh mesh;
     public int resolution;
