@@ -44,6 +44,12 @@ public class AudioCanvas : MonoBehaviour
         changeSongPanel.SetActive(true);
     }
 
+    public void BackButton()
+    {
+        changeSongPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
+
     public void KidsSeeGhosts()
     {
         //if the audio source is currently playing a song stop the song before changing to this song
