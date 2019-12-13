@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AudioTFace 
 {
-
     public float audioStartSize = 2f;
     public float audioScale = 2f;
     public float noise = 0.3f;
@@ -73,7 +72,7 @@ public class AudioTFace
         mesh.RecalculateNormals();
     }
 
-    private void UpdateMesh() //<-------- put in update for audio visualizer
+    private void UpdateMesh() 
     {
         mesh.Clear();
         mesh.RecalculateNormals();
@@ -82,6 +81,6 @@ public class AudioTFace
     private void Update()
     {
         ConstructMesh();
-        //UpdateMesh();
+        UpdateMesh();
     }
 }

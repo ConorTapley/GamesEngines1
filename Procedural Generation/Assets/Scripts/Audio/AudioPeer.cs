@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AudioPeer : MonoBehaviour
 {
-    static AudioSource audioSource;
+    public AudioSource audioSource;
     public static float[] samples = new float[512];
     public static float[] frequencyBands = new float[8]; //<---------making an array of frequency bands to make the audio visuals be more consistant (not huge where the bass is and tiny at the other end)
 
     void Start()
     {
-        audioSource = this.GetComponent<AudioSource>();
+        //audioSource = this.GetComponent<AudioSource>();
     }
 
     
