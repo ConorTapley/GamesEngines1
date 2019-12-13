@@ -25,11 +25,19 @@ public class AudioCanvas : MonoBehaviour
         
     }
 
+    ////////////////////////////////////////////////Sliders//////////////////////////////////////////////////////
     public void Volume (float sliderValue)
     {
         audioSource.volume = sliderValue;
     }
 
+    public void Pitch(float sliderValue)
+    {
+        audioSource.pitch = sliderValue;
+    }
+
+
+    ////////////////////////////////////////////////Buttons//////////////////////////////////////////////////////
     public void ChangeSongButton()
     {
         mainPanel.SetActive(false);
