@@ -13,11 +13,11 @@ public class AudioCanvas : MonoBehaviour
     private float resolution;
 
     public AudioSource audioSource;
-    [SerializeField] AudioClip youAndI;
-    [SerializeField] AudioClip kidsSeeGhosts;
+    [SerializeField] private AudioClip youAndI;
+    [SerializeField] private AudioClip kidsSeeGhosts;
 
-    [SerializeField] GameObject mainPanel;
-    [SerializeField] GameObject changeSongPanel;
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject changeSongPanel;
 
     private string volumeString;
     public Text volumeText;
@@ -48,6 +48,7 @@ public class AudioCanvas : MonoBehaviour
         pitchString = "1";
         intensityString = "2";
         resolutionString = "150";
+        intensity = 2;
     }
 
     void Update()
@@ -56,8 +57,8 @@ public class AudioCanvas : MonoBehaviour
         pitchText.text = pitchString;
         intensityText.text = intensityString;
 
-        //ap.intensity = intensity;
-        intensity = ap.intensity;
+        ap.intensity = intensity;
+        //intensity = ap.intensity;
         ap.resolution = resolution;
     }
 

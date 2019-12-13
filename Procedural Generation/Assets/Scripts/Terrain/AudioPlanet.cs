@@ -17,9 +17,6 @@ public class AudioPlanet : MonoBehaviour
     MeshFilter[] meshFilters;
     AudioTFace[] terrainFaces;
     
-    public float audioStartSize = 2f;
-    public float audioScale = 2f;
-
 
     Vector3[] vertices; //<--the points evenly spaces throughout the grid
     int[] triangles; //<-----the triangles that make up the grid
@@ -32,11 +29,6 @@ public class AudioPlanet : MonoBehaviour
     public int meshSize = 20;
     private int xSize;
     private int zSize;
-
-    [SerializeField]
-    private float minTerrainHeight = 0f;
-    [SerializeField]
-    private float maxTerrainHeight = 5.2f;
 
     
     private void OnValidate()
@@ -95,6 +87,7 @@ public class AudioPlanet : MonoBehaviour
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colourSettings.planetMaterial;
 
             terrainFaces[i] = new AudioTFace(meshFilters[i].sharedMesh, (int)resolution, directions[i]); //////////////
+            
         }
     }
 
