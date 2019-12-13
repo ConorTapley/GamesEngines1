@@ -14,6 +14,7 @@ public class AudioPlanet : MonoBehaviour
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     AudioTFace[] terrainFaces;
+    public float intensity = 2f;
     public float audioStartSize = 2f;
     public float audioScale = 2f;
 
@@ -21,9 +22,7 @@ public class AudioPlanet : MonoBehaviour
     Vector3[] vertices; //<--the points evenly spaces throughout the grid
     int[] triangles; //<-----the triangles that make up the grid
     //Vector2[] uvs; //<--------makes points to map textures
-
-    public float noise = 0.3f;////////////////////////////////////////////
-    public float noise2 = 2f;/////////////////////////////////////////////
+    
 
     Color[] colours;
     public Gradient gradient;
@@ -108,5 +107,4 @@ public class AudioPlanet : MonoBehaviour
         Initialize();
         GenerateColours();
     }
-    
 }

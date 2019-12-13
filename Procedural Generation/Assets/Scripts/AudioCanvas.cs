@@ -6,6 +6,10 @@ using UnityEngine.Audio;
 
 public class AudioCanvas : MonoBehaviour
 {
+    
+    public AudioTFace atf;
+    [SerializeField] private float intensity = 2f;
+
     public AudioSource audioSource;
     [SerializeField] AudioClip youAndI;
     [SerializeField] AudioClip kidsSeeGhosts;
@@ -28,6 +32,7 @@ public class AudioCanvas : MonoBehaviour
     {
         volumeString = "70";
         pitchString = "1";
+        intensity = atf.intensity;
     }
 
     void Update()

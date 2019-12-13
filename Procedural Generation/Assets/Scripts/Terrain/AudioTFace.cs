@@ -9,6 +9,7 @@ public class AudioTFace : MonoBehaviour
     public float audioScale = 2f;
     public float noise = 0.3f;
     public float noise2 = 2f;
+    public float intensity = 10f;
 
     Mesh mesh;
     public int resolution;
@@ -44,7 +45,7 @@ public class AudioTFace : MonoBehaviour
             for (int x = 0; x < resolution; x++)
             {
                 //visualizer height
-                float audioH = (AudioPeer.samples[x] * audioScale * Mathf.PerlinNoise(x * noise, y * noise) * noise2) + audioStartSize;
+                float audioH = (AudioPeer.samples[x] * audioScale * Mathf.PerlinNoise(x * noise, y * noise) * intensity) + audioStartSize;
                 int i = x + y * resolution;
                 Vector2 percent = new Vector2(x, y) / (resolution - 1);
                 //try visualizer here
