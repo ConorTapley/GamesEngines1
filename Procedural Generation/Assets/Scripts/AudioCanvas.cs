@@ -24,7 +24,12 @@ public class AudioCanvas : MonoBehaviour
         changeSongPanel.SetActive(false);
     }
 
-    
+    private void Start()
+    {
+        volumeString = "70";
+        pitchString = "1";
+    }
+
     void Update()
     {
         volumeText.text = volumeString + "%";
