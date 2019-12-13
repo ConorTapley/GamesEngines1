@@ -13,6 +13,11 @@ public class AudioCanvas : MonoBehaviour
     [SerializeField] GameObject mainPanel;
     [SerializeField] GameObject changeSongPanel;
 
+    private string volumeString;
+    public Text volumeText;
+    private string pitchString;
+    public Text pitchText;
+
     void Awake()
     {
         mainPanel.SetActive(true);
@@ -22,18 +27,22 @@ public class AudioCanvas : MonoBehaviour
     
     void Update()
     {
-        
+        volumeText.text = volumeString + "%";
+        pitchText.text = pitchString;
     }
 
     ////////////////////////////////////////////////Sliders//////////////////////////////////////////////////////
     public void Volume (float sliderValue)
     {
         audioSource.volume = sliderValue;
+        float volumeValue = sliderValue * 100;
+        volumeString = volumeValue.ToString("f0");
     }
 
     public void Pitch(float sliderValue)
     {
         audioSource.pitch = sliderValue;
+        pitchString = sliderValue.ToString("f1");
     }
 
 
