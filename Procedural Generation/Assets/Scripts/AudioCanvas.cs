@@ -9,6 +9,7 @@ public class AudioCanvas : MonoBehaviour
     public bool panelsOn = true;
 
     public AudioPlanet ap;
+    private float intensity;
 
     public AudioSource audioSource;
     [SerializeField] AudioClip youAndI;
@@ -50,6 +51,7 @@ public class AudioCanvas : MonoBehaviour
         volumeText.text = volumeString + "%";
         pitchText.text = pitchString;
         intensityText.text = intensityString;
+        ap.intensity = intensity;
     }
 
     ////////////////////////////////////////////////Sliders//////////////////////////////////////////////////////
@@ -68,7 +70,7 @@ public class AudioCanvas : MonoBehaviour
 
     public void Intensity(float sliderValue)
     {
-        ap.intensity = sliderValue;
+        intensity = sliderValue;
         intensityString = sliderValue.ToString("f0");
     }
 

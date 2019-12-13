@@ -17,13 +17,6 @@ public class AudioTFace : MonoBehaviour
     Vector3 axisA;
     Vector3 axisB;
 
-
-    private void Start()
-    {
-
-    }
-
-
     public AudioTFace(Mesh mesh, int resolution, Vector3 localUp)
     {
         this.mesh = mesh;
