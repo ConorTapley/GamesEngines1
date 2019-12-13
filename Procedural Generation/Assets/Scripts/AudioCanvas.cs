@@ -10,6 +10,7 @@ public class AudioCanvas : MonoBehaviour
 
     public AudioPlanet ap;
     private float intensity;
+    private float resolution;
 
     public AudioSource audioSource;
     [SerializeField] AudioClip youAndI;
@@ -24,6 +25,8 @@ public class AudioCanvas : MonoBehaviour
     public Text pitchText;
     private string intensityString;
     public Text intensityText;
+    private string resolutionString;
+    public Text resolutionText;
 
     void Awake()
     {
@@ -43,7 +46,8 @@ public class AudioCanvas : MonoBehaviour
     {
         volumeString = "70";
         pitchString = "1";
-        intensityString = "1";
+        intensityString = "2";
+        resolutionString = "150";
     }
 
     void Update()
@@ -51,7 +55,10 @@ public class AudioCanvas : MonoBehaviour
         volumeText.text = volumeString + "%";
         pitchText.text = pitchString;
         intensityText.text = intensityString;
-        ap.intensity = intensity;
+
+        //ap.intensity = intensity;
+        intensity = ap.intensity;
+        ap.resolution = resolution;
     }
 
     ////////////////////////////////////////////////Sliders//////////////////////////////////////////////////////
@@ -68,12 +75,18 @@ public class AudioCanvas : MonoBehaviour
         pitchString = sliderValue.ToString("f1");
     }
 
+    
     public void Intensity(float sliderValue)
     {
         intensity = sliderValue;
         intensityString = sliderValue.ToString("f0");
     }
-
+    
+    public void Resolution(float sliderValue)
+    {
+        resolution = sliderValue;
+        resolutionString = sliderValue.ToString();
+    }
 
     ////////////////////////////////////////////////Buttons//////////////////////////////////////////////////////
     public void ChangeSongButton()

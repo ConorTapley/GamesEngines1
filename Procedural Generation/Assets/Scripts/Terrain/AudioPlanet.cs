@@ -11,7 +11,7 @@ public class AudioPlanet : MonoBehaviour
     public float intensity = 2f;
 
     [Range(2, 256)]
-    public int resolution = 10;
+    public float resolution = 10;
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
@@ -94,7 +94,7 @@ public class AudioPlanet : MonoBehaviour
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colourSettings.planetMaterial;
 
-            terrainFaces[i] = new AudioTFace(meshFilters[i].sharedMesh, resolution, directions[i]);
+            terrainFaces[i] = new AudioTFace(meshFilters[i].sharedMesh, (int)resolution, directions[i]); //////////////
         }
     }
 
