@@ -16,6 +16,10 @@ public class AudioTFace
     Vector3 axisA;
     Vector3 axisB;
 
+    //
+    
+    //
+
     void Start()
     {
         
@@ -42,7 +46,7 @@ public class AudioTFace
             for (int x = 0; x < resolution; x++)
             {
                 //visualizer height
-                float audioH = (AudioPeer.samples[x] * audioScale * Mathf.PerlinNoise(x * noise, y * noise) * intensity) + audioStartSize;
+                float audioH = (AudioPlanet.samples[x] * audioScale * Mathf.PerlinNoise(x * noise, y * noise) * intensity) + audioStartSize;
                 int i = x + y * resolution;
                 Vector2 percent = new Vector2(x, y) / (resolution - 1);
                 
