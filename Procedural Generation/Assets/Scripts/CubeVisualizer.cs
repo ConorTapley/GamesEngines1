@@ -34,7 +34,7 @@ public class CubeVisualizer : MonoBehaviour
         {
             if(cubes != null)
             {
-                cubes[i].transform.localScale = new Vector3(cubeSize, AudioPeer.samples[i] * maxScale, cubeSize);
+                cubes[i].transform.localScale = new Vector3(cubeSize, AudioPeer.samples[i] * maxScale * 10, cubeSize);
             }
         }
     }
