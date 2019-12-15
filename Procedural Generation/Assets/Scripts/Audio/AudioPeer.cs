@@ -10,7 +10,7 @@ public class AudioPeer : MonoBehaviour
 
     void Start()
     {
-        //audioSource = this.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     

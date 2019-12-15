@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioTFace 
 {
+
     public float audioStartSize = 2f;
     public float audioScale = 2f;
     public float noise = 0.3f;
@@ -15,11 +16,6 @@ public class AudioTFace
     Vector3 localUp;
     Vector3 axisA;
     Vector3 axisB;
-
-    void Start()
-    {
-        
-    }
 
     public AudioTFace(Mesh mesh, int resolution, Vector3 localUp)
     {
@@ -45,7 +41,7 @@ public class AudioTFace
                 float audioH = (AudioPeer.samples[x] * audioScale * Mathf.PerlinNoise(x * noise, y * noise) * intensity) + audioStartSize;
                 int i = x + y * resolution;
                 Vector2 percent = new Vector2(x, y) / (resolution - 1);
-                
+                //try visualizer here
                 Vector3 pointOnUnitCube = localUp + (percent.x - .5f) * 2 * axisA + (percent.y - .5f) * 2 * axisB;
 
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized * audioH * Mathf.PerlinNoise(resolution, resolution); // make the local up affected by the audio
@@ -72,7 +68,7 @@ public class AudioTFace
         mesh.RecalculateNormals();
     }
 
-    private void UpdateMesh() 
+    private void UpdateMesh() //<-------- put in update for audio visualizer
     {
         mesh.Clear();
         mesh.RecalculateNormals();
@@ -81,6 +77,5 @@ public class AudioTFace
     private void Update()
     {
         ConstructMesh();
-        UpdateMesh();
     }
 }
