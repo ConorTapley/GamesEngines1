@@ -17,6 +17,9 @@ public class AudioCanvas : MonoBehaviour
     public AudioSource audioSource;
     [SerializeField] private AudioClip youAndI;
     [SerializeField] private AudioClip kidsSeeGhosts;
+    [SerializeField] private AudioClip lalala;
+    [SerializeField] private AudioClip bonfire;
+    [SerializeField] private AudioClip takeWhatUWant;
 
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject changeSongPanel;
@@ -55,6 +58,7 @@ public class AudioCanvas : MonoBehaviour
         volumeString = "70";
         pitchString = "1";
         sIntensityString = "2";
+        cIntensityString = "2";
         resolutionString = "150";
         sIntensity = 2;
         cIntensity = 2;
@@ -139,5 +143,38 @@ public class AudioCanvas : MonoBehaviour
         }
         audioSource.clip = youAndI;
         audioSource.PlayOneShot(youAndI);
+    }
+
+    public void Lalala()
+    {
+        //if the audio source is currently playing a song stop the song before changing to this song
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.clip = lalala;
+        audioSource.PlayOneShot(lalala);
+    }
+
+    public void TakeWhatUWant()
+    {
+        //if the audio source is currently playing a song stop the song before changing to this song
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.clip = takeWhatUWant;
+        audioSource.PlayOneShot(takeWhatUWant);
+    }
+
+    public void Bonfire()
+    {
+        //if the audio source is currently playing a song stop the song before changing to this song
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.clip = bonfire;
+        audioSource.PlayOneShot(bonfire);
     }
 }
