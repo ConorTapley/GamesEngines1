@@ -8,23 +8,34 @@ public class AudioCanvas : MonoBehaviour
 {
     public bool panelsOn = true;
 
+    public CubeVisualizer cv;
     public AudioPlanet ap;
-    private float intensity;
+    private float sIntensity;
+    private float cIntensity;
     private float resolution;
 
     public AudioSource audioSource;
     [SerializeField] private AudioClip youAndI;
     [SerializeField] private AudioClip kidsSeeGhosts;
+    [SerializeField] private AudioClip lalala;
+    [SerializeField] private AudioClip bonfire;
+    [SerializeField] private AudioClip takeWhatUWant;
 
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject changeSongPanel;
 
     private string volumeString;
     public Text volumeText;
+
     private string pitchString;
     public Text pitchText;
-    private string intensityString;
-    public Text intensityText;
+
+    private string sIntensityString;
+    public Text sIntensityText;
+
+    private string cIntensityString;
+    public Text cIntensityText;
+
     private string resolutionString;
     public Text resolutionText;
 
@@ -46,18 +57,22 @@ public class AudioCanvas : MonoBehaviour
     {
         volumeString = "70";
         pitchString = "1";
-        intensityString = "2";
+        sIntensityString = "2";
+        cIntensityString = "2";
         resolutionString = "150";
-        intensity = 2;
+        sIntensity = 2;
+        cIntensity = 2;
     }
 
     void Update()
     {
         volumeText.text = volumeString + "%";
         pitchText.text = pitchString;
-        intensityText.text = intensityString;
+        sIntensityText.text = sIntensityString;
+        cIntensityText.text = cIntensityString;
 
-        ap.intensity = intensity;
+        cv.maxScale = cIntensity;
+        ap.intensity = sIntensity;
         //intensity = ap.intensity;
         ap.resolution = resolution;
     }
@@ -77,12 +92,18 @@ public class AudioCanvas : MonoBehaviour
     }
 
     
-    public void Intensity(float sliderValue)
+    public void Sintensity(float sliderValue)
     {
-        intensity = sliderValue;
-        intensityString = sliderValue.ToString("f0");
+        sIntensity = sliderValue;
+        sIntensityString = sliderValue.ToString("f0");
     }
-    
+
+    public void Cintensity(float sliderValue)
+    {
+        cIntensity = sliderValue;
+        cIntensityString = sliderValue.ToString("f0");
+    }
+
     public void Resolution(float sliderValue)
     {
         resolution = sliderValue;
@@ -122,5 +143,38 @@ public class AudioCanvas : MonoBehaviour
         }
         audioSource.clip = youAndI;
         audioSource.PlayOneShot(youAndI);
+    }
+
+    public void Lalala()
+    {
+        //if the audio source is currently playing a song stop the song before changing to this song
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.clip = lalala;
+        audioSource.PlayOneShot(lalala);
+    }
+
+    public void TakeWhatUWant()
+    {
+        //if the audio source is currently playing a song stop the song before changing to this song
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.clip = takeWhatUWant;
+        audioSource.PlayOneShot(takeWhatUWant);
+    }
+
+    public void Bonfire()
+    {
+        //if the audio source is currently playing a song stop the song before changing to this song
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        audioSource.clip = bonfire;
+        audioSource.PlayOneShot(bonfire);
     }
 }

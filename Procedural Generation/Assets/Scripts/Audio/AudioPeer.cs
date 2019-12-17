@@ -4,20 +4,60 @@ using UnityEngine;
 
 public class AudioPeer : MonoBehaviour
 {
+    public bool useMic = false;
+    private string selectedDevice;
+    public AudioClip defaultClip;
+
     public AudioSource audioSource;
     public static float[] samples = new float[512];
     public static float[] frequencyBands = new float[8]; //<---------making an array of frequency bands to make the audio visuals be more consistant (not huge where the bass is and tiny at the other end)
 
     void Start()
     {
-        //audioSource = this.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+
+        //mic input
+        if(useMic)
+        {
+            if(Microphone.devices.Length > 0) //if there is no mic connected set usemic to false
+            {
+                selectedDevice = Microphone.devices[0].ToString();
+                audioSource.clip = Microphone.Start(selectedDevice, true, 10, AudioSettings.outputSampleRate);
+            }
+            else
+            {
+                useMic = false;
+            }
+            
+        }
+        else
+        {
+            audioSource.clip = defaultClip;
+            audioSource.Play();
+        }
     }
 
-    
+
     void Update()
     {
         GetSpectrumAudioSource();
         MakeFrequencyBands();
+
+        //mic input
+        if (useMic)
+        {
+            if (Microphone.devices.Length > 0) //if there is no mic connected set usemic to false
+            {
+                audioSource.Stop();
+                selectedDevice = Microphone.devices[0].ToString();
+                audioSource.clip = Microphone.Start(selectedDevice, true, 10, AudioSettings.outputSampleRate);
+                audioSource.Play();
+            }
+            else
+            {
+                useMic = false;
+            }
+        }
     }
 
 
