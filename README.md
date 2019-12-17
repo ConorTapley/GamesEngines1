@@ -12,6 +12,6 @@ To make the visualizer look better I used shader graph to make the sphere look b
 
 I created a rotation script to make the sphere spin.
 
-I created a canvas to controll the visualizer while the project is playing. I added a volume and pitch slider to change the volume and pitch of the audio source. I then made an intensity slider to change how much the vertices are multipied by based on the spectrum data, basically making the sphere be effected more or less by the audio. Then I added more songs so that you can chan change the song and see how different songs effect the visualizer.
+I created a canvas to control the visualizer while the project is playing. I added a volume and pitch slider to change the volume and pitch of the audio source. I then made an intensity slider to change how much the vertices are multipied by based on the spectrum data, basically making the sphere be effected more or less by the audio. Then I added more songs so that you can chan change the song and see how different songs effect the visualizer.
 
-Then I created a new visualizer because I felt 
+Then I created a new visualizer because I felt the sphere looked bare in the scene by itself. I made the vusualizer out of a cube prefav that is generated into a circle around the sphere visualizer. The cubes colours are randomly changed every frame. They are being multiplied by the spectrum data as well as the sphere. I added the rotation script to the new visualizer as well so it rotates arounds the sphere visualizer. Then I added an intensity slider to the canvas to control the intensity of the new visualizer.
