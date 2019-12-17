@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TerrainFace : MonoBehaviour
 {
+
     ShapeGenerator shapeGenerator;
     Mesh mesh;
     int resolution;
@@ -56,4 +57,5 @@ public class TerrainFace : MonoBehaviour
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
     }
+
 }
